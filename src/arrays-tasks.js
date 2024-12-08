@@ -387,13 +387,13 @@ function createChunks(arr, chunkSize) {
  *    generateOdds(5) => [ 1, 3, 5, 7, 9 ]
  */
 function generateOdds(len) {
-  const myArr = [];
-  for (let i = 0; i < len * 2; i += 1) {
-    if (i % 2 !== 0) {
-      myArr.push(i);
-    }
-  }
-  return myArr;
+  return Array(len * 2)
+    .fill()
+    .map((_, i) => {
+      const myItem = i;
+      return myItem;
+    })
+    .filter((curr) => curr % 2 !== 0);
 }
 
 /**
