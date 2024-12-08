@@ -579,14 +579,18 @@ function getMaxItems(arr, n) {
  *    findCommonElements([1, 2, 3], ['a', 'b', 'c']) => []
  */
 function findCommonElements(arr1, arr2) {
-  return arr1.reduce((acc, itemArr1) => {
-    arr2.forEach((itemArr2) => {
+  const arr = arr1.reduce((acc1, itemArr1) => {
+    const acc = arr2.reduce((acc2, itemArr2) => {
+      let myAcc2 = acc2;
       if (itemArr2 === itemArr1) {
-        acc.push(itemArr2);
+        myAcc2 = itemArr2;
       }
-    });
-    return acc;
+      return myAcc2;
+    }, '0');
+    acc1.push(acc);
+    return acc1;
   }, []);
+  return arr.filter((item) => item !== '0');
 }
 
 /**
