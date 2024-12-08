@@ -546,8 +546,16 @@ function getHexRGBValues(arr) {
  *   getMaxItems([ 10, 2, 7, 5, 3, -5 ], 3) => [ 10, 7, 5 ]
  *   getMaxItems([ 10, 10, 10, 10 ], 3) => [ 10, 10, 10 ]
  */
-function getMaxItems(/* arr, n */) {
-  throw new Error('Not implemented');
+function getMaxItems(arr, n) {
+  const myLength = arr.length > n ? n : arr.length;
+  const newArr = Array(myLength).fill();
+  const result = newArr.map((item) => {
+    let myItem = item;
+    myItem = Math.max(...arr);
+    arr.splice(arr.indexOf(myItem), 1);
+    return myItem;
+  });
+  return result;
 }
 
 /**
@@ -562,8 +570,15 @@ function getMaxItems(/* arr, n */) {
  *    findCommonElements(['a', 'b', 'c'], ['b', 'c', 'd']) => [ 'b', 'c' ]
  *    findCommonElements([1, 2, 3], ['a', 'b', 'c']) => []
  */
-function findCommonElements(/* arr1, arr2 */) {
-  throw new Error('Not implemented');
+function findCommonElements(arr1, arr2) {
+  return arr1.reduce((acc, itemArr1) => {
+    arr2.forEach((itemArr2) => {
+      if (itemArr2 === itemArr1) {
+        acc.push(itemArr2);
+      }
+    });
+    return acc;
+  }, []);
 }
 
 /**
@@ -577,8 +592,19 @@ function findCommonElements(/* arr1, arr2 */) {
  *    findLongestIncreasingSubsequence([3, 10, 2, 1, 20]) => 2
  *    findLongestIncreasingSubsequence([50, 3, 10, 7, 40, 80]) => 3
  */
-function findLongestIncreasingSubsequence(/* nums */) {
-  throw new Error('Not implemented');
+function findLongestIncreasingSubsequence(nums) {
+  let counter = 0;
+  return Math.max(
+    ...nums.reduce((acc, curr, i, arr) => {
+      if (arr[i] < arr[i + 1]) {
+        counter += 1;
+      } else {
+        acc.push(counter + 1);
+        counter = 0;
+      }
+      return acc;
+    }, [])
+  );
 }
 
 /**
