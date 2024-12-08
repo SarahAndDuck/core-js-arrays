@@ -284,10 +284,18 @@ function distinct(arr) {
  *    createNDimensionalArray(1, 1) => [0]
  */
 function createNDimensionalArray(n, size) {
-  let myArr = Array(size).fill(0);
-  for (let i = 0; i < n - 1; i += 1) {
-    myArr = Array(size).fill([...myArr]);
+  let counter = 0;
+  let myArr = [];
+  function recurs() {
+    if (counter < n - 1) {
+      counter += 1;
+      myArr = new Array(size).fill(recurs(0));
+    } else {
+      myArr = new Array(size).fill(0);
+    }
+    return myArr;
   }
+  recurs();
   return myArr;
 }
 
