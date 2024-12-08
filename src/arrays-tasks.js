@@ -472,8 +472,13 @@ function getIdentityMatrix(n) {
  *    getIndicesOfOddNumbers([2, 4, 6, 8, 10]) => []
  *    getIndicesOfOddNumbers([11, 22, 33, 44, 55]) => [0, 2, 4]
  */
-function getIndicesOfOddNumbers(/* numbers */) {
-  throw new Error('Not implemented');
+function getIndicesOfOddNumbers(numbers) {
+  return numbers.reduce((acc, item, index) => {
+    if (item % 2 !== 0) {
+      acc.push(index);
+    }
+    return acc;
+  }, []);
 }
 
 /**
@@ -486,8 +491,45 @@ function getIndicesOfOddNumbers(/* numbers */) {
  *    getHexRGBValues([ 0, 255, 16777215]) => [ '#000000', '#0000FF', '#FFFFFF' ]
  *    getHexRGBValues([]) => []
  */
-function getHexRGBValues(/* arr */) {
-  throw new Error('Not implemented');
+function getHexRGBValues(arr) {
+  const hextable = [
+    '0',
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    'A',
+    'B',
+    'C',
+    'D',
+    'E',
+    'F',
+  ];
+  return arr.map((item) => {
+    let entire = Math.floor(item / 16);
+    let remainder = item - entire * 16;
+    const myArr = [hextable[remainder]];
+    let myItem = item;
+    function recurs() {
+      myItem = entire;
+      if (entire !== 0) {
+        entire = Math.floor(myItem / 16);
+        remainder = myItem - entire * 16;
+        myArr.push(hextable[remainder]);
+      } else {
+        return arr;
+      }
+      recurs();
+      return arr;
+    }
+    recurs();
+    return myArr.join('').padStart(6, '0').padStart(7, '#');
+  });
 }
 
 /**
