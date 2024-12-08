@@ -84,11 +84,7 @@ function findElement(arr, value) {
  *    findAllOccurrences([ true, 0, 1, 'true' ], true) => 1
  */
 function findAllOccurrences(arr, item) {
-  let myCounter = 0;
-  for (let i = 0; i < arr.length; i += 1) {
-    myCounter = arr[i] === item ? myCounter + 1 : myCounter;
-  }
-  return myCounter;
+  return arr.filter((currentItem) => currentItem === item).length;
 }
 
 /**
